@@ -45,25 +45,25 @@ public class AclClient {
 
     private static final Map<MessageQueue, Long> OFFSE_TABLE = new HashMap<MessageQueue, Long>();
 
-    private static final String ACL_ACCESS_KEY = "RocketMQ";
+    private static final String ACL_ACCESS_KEY = "rocketmq2";
 
-    private static final String ACL_SECRET_KEY = "1234567";
+    private static final String ACL_SECRET_KEY = "12345678";
 
     public static void main(String[] args) throws MQClientException, InterruptedException {
         producer();
-        pushConsumer();
-        pullConsumer();
+//        pushConsumer();
+//        pullConsumer();
     }
 
     public static void producer() throws MQClientException {
-        DefaultMQProducer producer = new DefaultMQProducer("ProducerGroupName", getAclRPCHook());
+        DefaultMQProducer producer = new DefaultMQProducer("groupB", getAclRPCHook());
         producer.setNamesrvAddr("127.0.0.1:9876");
         producer.start();
 
         for (int i = 0; i < 128; i++)
             try {
                 {
-                    Message msg = new Message("TopicTest",
+                    Message msg = new Message("topicB",
                         "TagA",
                         "OrderID188",
                         "Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));
